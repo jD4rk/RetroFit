@@ -27,5 +27,6 @@ public class MyApplication extends Application {
         Log.d(LOG, "onCreate");
         super.onCreate();
         component = DaggerRetrofitComponent.builder().retrofitModule(new RetrofitModule(URL)).build();
+
     }
 }
