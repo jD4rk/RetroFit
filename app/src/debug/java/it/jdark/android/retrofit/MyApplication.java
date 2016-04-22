@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.stetho.Stetho;
+import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
 
 import it.jdark.android.retrofit.dependencyInjection.DaggerRetrofitComponent;
 import it.jdark.android.retrofit.dependencyInjection.RetrofitComponent;
@@ -32,5 +33,9 @@ public class MyApplication extends Application {
 
         component = DaggerRetrofitComponent.builder().retrofitModule(new RetrofitModule(URL)).build();
         Stetho.initializeWithDefaults(getApplicationContext());
+//        if (BuildConfig.DEBUG) {
+            AndroidDevMetrics.initWith(this);
+//        }
+
     }
 }
