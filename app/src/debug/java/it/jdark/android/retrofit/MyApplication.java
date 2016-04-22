@@ -33,9 +33,9 @@ public class MyApplication extends Application {
 
         component = DaggerRetrofitComponent.builder().retrofitModule(new RetrofitModule(URL)).build();
         Stetho.initializeWithDefaults(getApplicationContext());
-//        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             AndroidDevMetrics.initWith(this);
-//        }
+        }
 
     }
 }
