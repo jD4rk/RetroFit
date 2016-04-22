@@ -3,9 +3,9 @@ package it.jdark.android.retrofit;
 import android.app.Application;
 import android.util.Log;
 
-import it.jdark.android.retrofit.dipendentInjection.DaggerRetrofitComponent;
-import it.jdark.android.retrofit.dipendentInjection.RetrofitComponent;
-import it.jdark.android.retrofit.dipendentInjection.RetrofitModule;
+import it.jdark.android.retrofit.depencencyInjection.DaggerRetrofitComponent;
+import it.jdark.android.retrofit.depencencyInjection.RetrofitComponent;
+import it.jdark.android.retrofit.depencencyInjection.RetrofitModule;
 
 /**
  * Created by jDark on 12/04/16.

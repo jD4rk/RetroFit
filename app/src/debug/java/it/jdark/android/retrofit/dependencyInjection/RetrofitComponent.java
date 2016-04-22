@@ -1,4 +1,4 @@
-package it.jdark.android.retrofit.dipendentInjection;
+package it.jdark.android.retrofit.dependencyInjection;
 
 import javax.inject.Singleton;
 

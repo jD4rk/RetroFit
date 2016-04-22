@@ -6,20 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.facebook.stetho.okhttp3.StethoInterceptor;
-
 import javax.inject.Inject;
 
 import it.jdark.android.retrofit.databinding.MainActivityBinding;
 import it.jdark.android.retrofit.modelView.ModelView;
 import it.jdark.android.retrofit.pojo.Model;
 import it.jdark.android.retrofit.rest.RetrofitWeather;
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,18 +1,10 @@
-package it.jdark.android.retrofit.dipendentInjection;
+package it.jdark.android.retrofit.depencencyInjection;
 
-import com.facebook.stetho.okhttp3.StethoInterceptor;
-
-import java.io.IOException;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -31,14 +23,8 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    Interceptor provideInterceptor() {
-        return new StethoInterceptor();
-    }
-
-    @Provides
-    @Singleton
-    OkHttpClient provideOkHttpClient(Interceptor interceptor) {
-        return new OkHttpClient().newBuilder().addNetworkInterceptor(interceptor).build();
+    OkHttpClient provideOkHttpClient() {
+        return new OkHttpClient().newBuilder().build();
     }
 
     @Provides

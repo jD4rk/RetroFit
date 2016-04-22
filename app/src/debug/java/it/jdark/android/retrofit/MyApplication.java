@@ -5,9 +5,10 @@ import android.util.Log;
 
 import com.facebook.stetho.Stetho;
 
-import it.jdark.android.retrofit.dipendentInjection.DaggerRetrofitComponent;
-import it.jdark.android.retrofit.dipendentInjection.RetrofitComponent;
-import it.jdark.android.retrofit.dipendentInjection.RetrofitModule;
+import it.jdark.android.retrofit.dependencyInjection.DaggerRetrofitComponent;
+import it.jdark.android.retrofit.dependencyInjection.RetrofitComponent;
+import it.jdark.android.retrofit.dependencyInjection.RetrofitModule;
+
 
 /**
  * Created by jDark on 12/04/16.

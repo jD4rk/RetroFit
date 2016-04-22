@@ -1,4 +1,4 @@
-package it.jdark.android.retrofit.dipendentInjection;
+package it.jdark.android.retrofit.depencencyInjection;
 
 import android.app.Application;
 
