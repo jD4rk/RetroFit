@@ -8,10 +8,12 @@ import android.util.Log;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import javax.inject.Inject;
+
 import it.jdark.android.retrofit.databinding.MainActivityBinding;
 import it.jdark.android.retrofit.modelView.ModelView;
 import it.jdark.android.retrofit.pojo.Model;
-import it.jdark.android.retrofit.rest.RestInterface;
+import it.jdark.android.retrofit.rest.RetrofitWeather;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,12 +23,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    final static String LOG = "Retrofit";
+    private final String LOG = getClass().getSimpleName();
 
     private final String URL = "http://api.openweathermap.org/data/2.5/";
     private final String API_KEY = "931d25ea8d06c2a5cc3bed22c2a0cdac";
+    private final String TARGET_REQUEST = "Rimini,it";
+
 
     MainActivityBinding binding;
+    @Inject
+    Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,48 +43,25 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .build();
+        ((MyApplication) getApplication()).getComponent().inject(this);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-        RestInterface restInterface = retrofit.create(RestInterface.class);
+        retrofit.create(RetrofitWeather.class).getWeatherReport(TARGET_REQUEST, API_KEY)
+                .enqueue(new Callback<Model>() {
+                    @Override
+                    public void onResponse(Call<Model> call, Response<Model> response) {
+                        int resCode= response.code();
+                        Log.i(LOG, "Response code: " + resCode);
+                        Model data = response.body();
 
-        // Asynchronous Request
-        Call<Model> call = restInterface.getWeatherReport("Rimini,it", API_KEY);
-        call.enqueue(new Callback<Model>() {
-            @Override
-            public void onResponse(Call<Model> call, Response<Model> response) {
-                int resCode= response.code();
-                Log.i(LOG, "Response code: " + resCode);
-                Model data = response.body();
-
-                ModelView modelView = new ModelView(data);  // Init ModelView
-                binding.setModelView(modelView);            // Binding ModelView to the Binding
-            }
-            @Override
-            public void onFailure(Call<Model> call, Throwable t) {
-                Log.w(LOG, "-- Request: onFailure");
-                Log.w(LOG, "-- " + t.getMessage());
-            }
-        });
-
-//        // Synchronous Request without DataBinding
-//        try {
-//            Response<Model> response= call.execute();
-//            int resCode= response.code();
-//            Log.i(LOG, "Response code: " + resCode);
-//            Model data= response.body();
-//            city.setText("city :"+data.getName());
-//            status.setText("Status :"+data.getWeather().get(0).getDescription());
-//            humidity.setText("humidity :"+data.getMain().getHumidity().toString());
-//            pressure.setText("pressure :"+data.getMain().getPressure().toString());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+                        ModelView modelView = new ModelView(data);  // Init ModelView
+                        binding.setModelView(modelView);            // Binding ModelView to the Binding
+                    }
+                    @Override
+                    public void onFailure(Call<Model> call, Throwable t) {
+                        Log.w(LOG, "-- Request: onFailure");
+                        Log.w(LOG, "-- " + t.getMessage());
+                    }
+                });
     }
 
 }

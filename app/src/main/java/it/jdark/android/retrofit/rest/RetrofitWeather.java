@@ -9,10 +9,10 @@ import retrofit2.http.Query;
  * Created on 12/04/16.
  * @Autor jDark
  */
-public interface RestInterface {
+public interface RetrofitWeather {
 
-//    @GET("weather?q=Rimini,it&appid=931d25ea8d06c2a5cc3bed22c2a0cdac")
-//    Call<Model> getWeatherReport();
+//  How the request looks like:
+//  "weather?q=Rimini,it&appid=931d25ea8d06c2a5cc3bed22c2a0cdac"
     @GET("weather")
     Call<Model> getWeatherReport(@Query("q") String city, @Query("appid") String apiKey);
 }

@@ -8,12 +8,6 @@ import com.google.gson.annotations.SerializedName;
 @Generated("org.jsonschema2pojo")
 public class Sys {
 
-    @SerializedName("type")
-    @Expose
-    private Integer type;
-    @SerializedName("id")
-    @Expose
-    private Integer id;
     @SerializedName("message")
     @Expose
     private Double message;
@@ -26,42 +20,6 @@ public class Sys {
     @SerializedName("sunset")
     @Expose
     private Integer sunset;
-
-    /**
-     * 
-     * @return
-     *     The type
-     */
-    public Integer getType() {
-        return type;
-    }
-
-    /**
-     * 
-     * @param type
-     *     The type
-     */
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    /**
-     * 
-     * @return
-     *     The id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * 
-     * @param id
-     *     The id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     /**
      * 

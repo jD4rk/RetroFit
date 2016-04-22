@@ -5,18 +5,31 @@ import android.util.Log;
 
 import com.facebook.stetho.Stetho;
 
+import it.jdark.android.retrofit.dipendentInjection.DaggerRetrofitComponent;
+import it.jdark.android.retrofit.dipendentInjection.RetrofitComponent;
+import it.jdark.android.retrofit.dipendentInjection.RetrofitModule;
+
 /**
  * Created by jDark on 12/04/16.
  */
 public class MyApplication extends Application {
+
+    private final String LOG = getClass().getSimpleName();
+    private final String URL = "http://api.openweathermap.org/data/2.5/";
+
+    RetrofitComponent component;
+
+    public RetrofitComponent getComponent() {
+        return component;
+    }
+
+
     @Override
     public void onCreate() {
+        Log.d(LOG, "onCreate");
         super.onCreate();
-        Log.d(MainActivity.LOG, "Application - onCreate");
-//        Stetho.initialize(Stetho.newInitializerBuilder(this)
-//                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-//                .build());
-        Stetho.initializeWithDefaults(getApplicationContext());
 
+        component = DaggerRetrofitComponent.builder().retrofitModule(new RetrofitModule(URL)).build();
+        Stetho.initializeWithDefaults(getApplicationContext());
     }
 }
