@@ -100,6 +100,8 @@ dependencies {
     // Dependencies to debug only the application through chrome - Very cool network traffic tools (chrome://inspect)
     debugCompile "com.facebook.stetho:stetho:${stethoVersion}"
     debugCompile "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
+    // Another option to debug Network Call
+    debugCompile "com.squareup.okhttp3:logging-interceptor:${okHttp3Version}"
 
     // Dependency Injection with Dagger2
     compile "com.google.dagger:dagger:${daggerVersion}"

@@ -1,6 +1,7 @@
 package it.jdark.android.retrofit;
 
 import android.app.Application;
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.facebook.stetho.Stetho;
@@ -36,6 +37,5 @@ public class MyApplication extends Application {
         if (BuildConfig.DEBUG) {
             AndroidDevMetrics.initWith(this);
         }
-
     }
 }
