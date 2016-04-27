@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import it.jdark.android.retrofit.Utils.HostSelectionInterceptor;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -28,34 +29,65 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    @Named("stetho")
-    Interceptor provideInterceptor() {
+    @Named("Stetho")
+    Interceptor provideStethoInterceptor() {
         return new StethoInterceptor();
     }
 
 
     @Provides
     @Singleton
-    @Named("log")
-    Interceptor proviteLogInterceptor() {
+    @Named("HttpLog")
+    Interceptor provideHttpLogInterceptor() {
         return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-
     }
+
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(@Named("stetho") Interceptor stethoInterceptor, @Named("log") Interceptor logInterceptor) {
+    HostSelectionInterceptor provideDynamicInterceptor() {
+        return new HostSelectionInterceptor();
+    }
+
+
+    @Provides
+    @Singleton
+    @Named("Static")
+    OkHttpClient provideStaticOkHttpClient(@Named("Stetho") Interceptor stethoInterceptor, @Named("HttpLog") Interceptor logInterceptor) {
         return new OkHttpClient().newBuilder()
                 .addNetworkInterceptor(stethoInterceptor)
-                .addInterceptor(logInterceptor).build();
+                .addInterceptor(logInterceptor)
+                .build();
     }
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(OkHttpClient okHttpClient) {
+    @Named("Dynamic")
+    OkHttpClient provideDynamicOkHttpClient(HostSelectionInterceptor dynamicInterceptor, @Named("Stetho") Interceptor stethoInterceptor, @Named("HttpLog") Interceptor logInterceptor) {
+        return new OkHttpClient().newBuilder()
+                .addNetworkInterceptor(stethoInterceptor)
+                .addInterceptor(logInterceptor)
+                .addInterceptor(dynamicInterceptor)
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    @Named("Static")
+    Retrofit provideStaticRetrofit(@Named("Static") OkHttpClient okHttpClient) {
         return new Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    @Named("Dynamic")
+    Retrofit provideDynamicRetrofit(@Named("Dynamic") OkHttpClient okHttpClient) {
+        return new Retrofit.Builder().baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .callFactory(okHttpClient)
                 .build();
     }
 }

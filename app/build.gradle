@@ -97,7 +97,7 @@ dependencies {
     // Dependency to fix annotation @Generated("org.jsonschema2pojo") that came from http://www.jsonschema2pojo.org/ if you used it to generate pojo class for json
     provided "org.glassfish:javax.annotation:${javaxAnnotation}"
 
-    // Dependencies to debug only the application through chrome - Very cool network traffic tools (chrome://inspect)
+    // Dependencies for debug version only that to analyse the application through chrome - Very cool network traffic tools (chrome://inspect)
     debugCompile "com.facebook.stetho:stetho:${stethoVersion}"
     debugCompile "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
     // Another option to debug Network Call
