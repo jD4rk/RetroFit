@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private final String TARGET_REQUEST = "Rimini,it";
 
 
-    @Inject @Named("Dynamic") Retrofit retrofit;
+    @Inject @Named("Static") Retrofit retrofit;
     @Inject HostSelectionInterceptor dynamicClient;
     MainActivityBinding binding;
 
@@ -65,16 +65,8 @@ public class MainActivity extends AppCompatActivity {
         retrofit.create(RetrofitWeather.class).getWeatherReport(TARGET_REQUEST, API_KEY).enqueue(callback);
 //        retrofit.create(RetrofitWeather.class).getWeatherReportFromDynamicUrl("weather?q="+TARGET_REQUEST+"&appid="+API_KEY).enqueue(callback);
 
-        // DYNAMIC URL EXAMPLE
-        // --- based on retrofit ---
+        // Dynamic url example
 //        retrofit.create(RetrofitWeather.class).getWeatherReportFromDynamicUrl("http://www.faerdf.com/weather?q="+TARGET_REQUEST+"&appid="+API_KEY).enqueue(callback);
 //        retrofit.create(RetrofitWeather.class).getWeatherReportFromDynamicUrl("subdomain/weather?q="+TARGET_REQUEST+"&appid="+API_KEY).enqueue(callback);
-
-
-        // --- Host Selection Interceptor ---
-        // NOTE: Override the Interceptor -> invalidate the functional of HttpLoggerIterceptor (I's no possible anymore log the call properly)
-        dynamicClient.setHost("url");
-        retrofit.create(RetrofitWeather.class).getWeatherReport(TARGET_REQUEST, API_KEY).enqueue(callback);
-
     }
 }
