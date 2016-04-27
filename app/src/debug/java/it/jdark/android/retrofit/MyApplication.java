@@ -15,7 +15,7 @@ import it.jdark.android.retrofit.dependencyInjection.RetrofitModule;
 /**
  * Created by jDark on 12/04/16.
  */
-public class MyApplication extends Application {
+public class MyApplication extends BaseApplication {
 
     private final String LOG = getClass().getSimpleName();
     private final String URL = "http://api.openweathermap.org/data/2.5/";
@@ -26,16 +26,16 @@ public class MyApplication extends Application {
         return component;
     }
 
-
     @Override
     public void onCreate() {
-        Log.d(LOG, "onCreate");
         super.onCreate();
-
+        Log.d(LOG, "Init Dagger");
         component = DaggerRetrofitComponent.builder().retrofitModule(new RetrofitModule(URL)).build();
-        Stetho.initializeWithDefaults(getApplicationContext());
-        if (BuildConfig.DEBUG) {
+
+        Log.d(LOG, "Init Debug Context");
+//        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(getApplicationContext());
             AndroidDevMetrics.initWith(this);
-        }
+//        }
     }
 }
