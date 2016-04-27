@@ -70,13 +70,10 @@ public class MainActivity extends AppCompatActivity {
         // --- based on retrofit ---
 //        retrofit.create(RetrofitWeather.class).getWeatherReportFromDynamicUrl("http://www.faerdf.com/weather?q="+TARGET_REQUEST+"&appid="+API_KEY).enqueue(callback);
 //        retrofit.create(RetrofitWeather.class).getWeatherReportFromDynamicUrl("subdomain/weather?q="+TARGET_REQUEST+"&appid="+API_KEY).enqueue(callback);
-
-
-
         // --- Host Selection Interceptor ---
         // NOTE: Override the Interceptor -> invalidate the functional of HttpLoggerIterceptor (I's no possible anymore log the call properly)
-        dynamicClient.setHost("url");
-        retrofit.create(RetrofitWeather.class).getWeatherReport(TARGET_REQUEST, API_KEY).enqueue(callback);
+//        dynamicClient.setHost("url");
+//        retrofit.create(RetrofitWeather.class).getWeatherReport(TARGET_REQUEST, API_KEY).enqueue(callback);
 
     }
 }
