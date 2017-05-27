@@ -1,4 +1,4 @@
-package it.jdark.android.retrofit.Utils;
+package it.jdark.android.retrofit.utils;
 
 import java.io.IOException;
 

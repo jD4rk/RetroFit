@@ -7,7 +7,6 @@ import it.jdark.android.retrofit.MainActivity;
 
 /**
  * Created on 21/04/16.
- *
  * @Autor jDark
  */
 @Singleton

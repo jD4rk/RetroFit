@@ -1,7 +1,5 @@
 package it.jdark.android.retrofit;
 
-import android.app.Application;
-import android.os.StrictMode;
 import android.util.Log;
 
 import com.facebook.stetho.Stetho;
@@ -33,9 +31,7 @@ public class MyApplication extends BaseApplication {
         component = DaggerRetrofitComponent.builder().retrofitModule(new RetrofitModule(URL)).build();
 
         Log.d(LOG, "Init Debug Context");
-//        if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(getApplicationContext());
             AndroidDevMetrics.initWith(this);
-//        }
     }
 }

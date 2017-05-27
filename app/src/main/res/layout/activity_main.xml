@@ -8,6 +8,7 @@
             name="modelView"
             type="it.jdark.android.retrofit.modelView.ModelView" />
     </data>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,59 +29,110 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            tools:layout_editor_absoluteY="?attr/actionBarSize"
+            tools:layout_editor_absoluteX="0dp">
 
-            <LinearLayout
 
+            <TextView
+                android:id="@+id/txt_city"
                 android:layout_width="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:text='@{"City: " + modelView.getName}'
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintVertical_bias="0.5"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintHorizontal_bias="0.5" />
 
-                <TextView
-                    android:id="@+id/txt_city"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="30dp"
-                    android:layout_height="wrap_content"
-                    android:text='@{"City: " + modelView.getName}'/>
+            <TextView
+                android:id="@+id/txt_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"Status: "+ modelView.getStatus}'
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_conversion_absoluteX="192dp"
+                tools:layout_conversion_absoluteY="265dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_city"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginRight="8dp"
+                app:layout_constraintRight_toRightOf="parent" />
 
-                <TextView
-                    android:id="@+id/txt_status"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="30dp"
-                    android:layout_height="wrap_content"
-                    android:text='@{"Status: "+ modelView.getStatus}' />
+            <TextView
+                android:id="@+id/txt_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"Unidity: "+ modelView.getHumidity}'
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_conversion_absoluteX="192dp"
+                tools:layout_conversion_absoluteY="341dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_status"
+                android:layout_marginRight="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
-                <TextView
-                    android:id="@+id/txt_humidity"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="30dp"
-                    android:layout_height="wrap_content"
-                    android:text='@{"Unidity: "+ modelView.getHumidity}' />
+            <TextView
+                android:id="@+id/txt_press"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{"Pressure: "+ modelView.getPressure}'
+                tools:layout_conversion_absoluteHeight="16dp"
+                tools:layout_conversion_absoluteWidth="0dp"
+                tools:layout_conversion_absoluteX="192dp"
+                tools:layout_conversion_absoluteY="418dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_humidity"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginRight="8dp"
+                app:layout_constraintRight_toRightOf="parent" />
 
-                <TextView
-                    android:id="@+id/txt_press"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="30dp"
-                    android:layout_height="wrap_content"
-                    android:text='@{"Pressure: "+ modelView.getPressure}' />
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="8dp"
+                android:checked="true"
 
-            </LinearLayout>
-        </RelativeLayout>
+                android:layout_marginRight="8dp"
+                android:text="@string/check_box_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-        <!--<android.support.design.widget.FloatingActionButton-->
-            <!--android:id="@+id/fab"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom|end"-->
-            <!--android:layout_margin="@dimen/fab_margin"-->
-            <!--android:src="@android:drawable/ic_dialog_email" />-->
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_static"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@android:drawable/presence_online" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_dynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@android:drawable/presence_offline" />
 
     </android.support.design.widget.CoordinatorLayout>
+
 </layout>
